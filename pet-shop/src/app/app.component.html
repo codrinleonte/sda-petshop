@@ -1,0 +1,71 @@
+<nav class="navbar navbar-light bg-light">
+  <a class="navbar-brand" href="#">
+    <img src="https://i.pinimg.com/originals/d2/c8/2e/d2c82e570e45238b68b30b36c4aca592.gif" width="40" height="40" class="d-inline-block align-top" alt="">
+    PetShop
+  </a>
+</nav>
+
+<div class="container-fluid align-center">
+  <button *ngIf = "!shouldEdit" type="button" class="btn btn-outline-primary mb-5 mt-5" (click) = "shouldEdit = !shouldEdit">Add New Pet</button>
+
+
+<div class ="border p-3 flex-column mb-5 mt-5" style="width: 500px;" *ngIf = "shouldEdit">
+  <div class="flex-row">
+    <div class="form-group" >
+
+      <label for="name">Name</label>
+      <input type="text" class="form-control" id="name"
+            required [(ngModel)] = "name"
+            name="name">
+
+      <label for="breed">Breed</label>
+      <input type="text" class="form-control" id="breed"
+            required [(ngModel)] = "breed"
+            name="name">
+
+      <label for="breed">Owner</label>
+      <input type="text" class="form-control" id="owner"
+            required [(ngModel)] = "owner"
+            name="owner">
+      <div class="form-group">
+        <label for="exampleFormControlSelect1">Pet Type</label>
+        <select class="form-control" id="exampleFormControlSelect1" [(ngModel)] = "type">
+          <option>Cat</option>
+          <option>Dog</option>
+          <option>Chicken</option>
+          <option>Piggy</option>
+          <option>Fish</option>
+        </select>
+      </div>
+
+    </div>
+    <div class="form-group ml-3">
+      <label for="exampleFormControlTextarea1">Description</label>
+      <textarea class="form-control " id="exampleFormControlTextarea1" rows="3" style="height: 77%; width:300px" [(ngModel)] = "description"></textarea>
+    </div>
+  </div>
+  <div class="form-group">
+  <label for="picture">Picture</label>
+  <input type="text" class="form-control" id="picture" [(ngModel)] = "picture"
+        required
+        name="picture">
+  </div>
+  <button type="button" class="btn btn-primary btn-lg" (click) = "addPet()">Add Pet</button>
+</div>
+
+<div class="pets-container flex-row">
+  <div class="card mr-3" style="width: 300px;" *ngFor = "let pet of pets">
+    <img [src]="pet.picture" class="card-img-top" alt="..." style="height: 50%;" >
+    <div class="card-body" style = "">
+        <h5 class="card-title">{{pet.name}}</h5>
+        <h6 class="card-title">{{pet.type}} - {{pet. breed}}</h6>
+        <p class="card-text" style = "text-overflow: ellipsis; overflow:hidden; white-space:nowrap; ">{{pet.description}}</p>
+    </div>
+
+    <div class="flex-row p-3 center align-center" style="">
+      <button type="button" class=" mr-2 btn btn-primary">Edit</button>
+      <button type="button" class="btn btn-danger" (click) = "deletePet(pet.id)">Delete</button>
+    </div>
+  </div>
+</div>
+</div>
